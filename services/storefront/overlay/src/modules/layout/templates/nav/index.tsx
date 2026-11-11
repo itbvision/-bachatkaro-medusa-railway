@@ -6,12 +6,14 @@ import CartButton from "@modules/layout/components/cart-button"
 import LanguageSwitcher from "@modules/layout/components/language-switcher"
 import AreaSelector from "@modules/layout/components/area-selector"
 import SearchBox from "@modules/layout/components/search-box"
+import { retrieveCustomer } from "@lib/data/customer"
 import { getT } from "@lib/i18n/get-locale"
 import { AREA_COOKIE } from "@lib/i18n/config"
 
 export default async function Nav() {
   const { t, locale } = await getT()
   const area = (await cookies()).get(AREA_COOKIE)?.value ?? "wah"
+  const customer = await retrieveCustomer()
   const areas = [
     { id: "wah", label: t("area.wah") },
     { id: "attock", label: t("area.attock") },
@@ -22,6 +24,9 @@ export default async function Nav() {
     { href: "/brands", label: t("nav.brands") },
     { href: "/build-my-pack", label: t("nav.buildPack") },
     { href: "/support", label: t("nav.support") },
+    customer
+      ? { href: "/account", label: t("nav.account") }
+      : { href: "/sign-in", label: t("nav.signIn") },
   ]
 
   return (
