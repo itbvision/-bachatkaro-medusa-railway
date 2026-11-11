@@ -1,0 +1,12 @@
+/* Bachat Karo brand classes (plain CSS, so no tailwind.config.js change is needed) */
+.bg-bk-navy{background-color:#17396B}
+.bg-bk-amber{background-color:#F5A623}
+.bg-bk-cream{background-color:#FFF8F1}
+.bg-bk-cream\/95{background-color:rgb(255 248 241 / .95)}
+.bg-bk-line{background-color:#F0E3D6}
+.border-bk-line{border-color:#F0E3D6}
+.text-bk-navy{color:#17396B}
+.text-bk-amber{color:#F5A623}
+.text-bk-sale{color:#C2410C}
+.font-display{font-family:var(--font-montserrat),system-ui,sans-serif}
+.font-urdu{font-family:var(--font-naskh),serif}

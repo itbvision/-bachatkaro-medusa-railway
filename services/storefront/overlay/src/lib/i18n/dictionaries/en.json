@@ -1,0 +1,20 @@
+{
+  "nav.deliverTo": "Deliver to",
+  "nav.search": "Search atta, rice, oil, ghee",
+  "nav.cart": "Cart",
+  "area.wah": "Wah Cantt - New City Phase 2",
+  "area.attock": "Attock City",
+  "hero.badge": "MONTHLY RATION PACK",
+  "hero.title": "Atta, rice, oil, ghee and more in one order",
+  "hero.tagline": "بچت کرو - سستے داموں، بہترین معیار",
+  "hero.cta": "Build my pack",
+  "home.categories": "Shop by category",
+  "home.deals": "Bachat deals",
+  "home.seeAll": "See all",
+  "product.add": "Add",
+  "product.save": "Save {pct}%",
+  "cart.freeDelivery": "Add {amount} more for free delivery",
+  "cart.saved": "You saved {amount} on this order",
+  "cart.cod": "Cash on delivery",
+  "cart.place": "Place order - Cash on delivery"
+}
