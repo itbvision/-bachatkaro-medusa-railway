@@ -1,4 +1,4 @@
-import { Migration } from "@mikro-orm/migrations"
+import { Migration } from "@medusajs/framework/mikro-orm/migrations"
 
 // Hand-written equivalent of `medusa db:generate productMedia`
 export class Migration20261110000000 extends Migration {
