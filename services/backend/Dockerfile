@@ -34,8 +34,8 @@ RUN cd apps/backend && node scripts/patch-medusa-config.mjs
 RUN pnpm install --frozen-lockfile --filter "@dtc/backend..." \
  && pnpm --filter @dtc/backend add --save-exact "@rokmohar/medusa-plugin-meilisearch@${MEILISEARCH_PLUGIN_VERSION}"
 # >>> ADDED: make sure the admin widget's dependencies exist, and log what is installed
-RUN cd apps/backend && node -e "const p=require('./package.json');const d={...p.dependencies,...p.devDependencies};for(const n of ['@medusajs/admin-sdk','@medusajs/ui','@medusajs/icons','@medusajs/js-sdk','@tanstack/react-query'])console.log('[deps]',n,d[n]||'MISSING')" \
- && (node -e "const p=require('./package.json');process.exit(({...p.dependencies,...p.devDependencies})['@tanstack/react-query']?0:1)" || pnpm --filter @dtc/backend add --save-exact @tanstack/react-query@5.64.2)
+# >>> ADDED: admin widget dependencies (versions match Medusa 2.21.2)
+RUN pnpm --filter @dtc/backend add --save-exact @medusajs/icons@2.21.2 @medusajs/js-sdk@2.21.2
 ENV NODE_OPTIONS=--max-old-space-size=4096
 RUN cd apps/backend && DISABLE_MEDUSA_ADMIN="${DISABLE_MEDUSA_ADMIN}" pnpm exec medusa build
 
