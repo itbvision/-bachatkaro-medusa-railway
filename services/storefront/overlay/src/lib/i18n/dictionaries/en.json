@@ -16,5 +16,11 @@
   "cart.freeDelivery": "Add {amount} more for free delivery",
   "cart.saved": "You saved {amount} on this order",
   "cart.cod": "Cash on delivery",
-  "cart.place": "Place order - Cash on delivery"
+  "cart.place": "Place order - Cash on delivery",
+  "footer.categories": "Categories",
+  "footer.viewAll": "View all categories",
+  "footer.rights": "All rights reserved.",
+  "footer.poweredBy": "Powered by",
+  "footer.newTab": "(opens in a new tab)",
+  "categories.title": "All categories"
 }

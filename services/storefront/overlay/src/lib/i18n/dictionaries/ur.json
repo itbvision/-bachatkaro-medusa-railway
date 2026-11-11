@@ -16,5 +16,11 @@
   "cart.freeDelivery": "مفت ڈیلیوری کے لیے مزید {amount} کی خریداری کریں",
   "cart.saved": "آپ نے اس آرڈر پر {amount} بچائے",
   "cart.cod": "کیش آن ڈیلیوری",
-  "cart.place": "آرڈر دیں - کیش آن ڈیلیوری"
+  "cart.place": "آرڈر دیں - کیش آن ڈیلیوری",
+  "footer.categories": "کیٹیگریز",
+  "footer.viewAll": "تمام کیٹیگریز دیکھیں",
+  "footer.rights": "جملہ حقوق محفوظ ہیں۔",
+  "footer.poweredBy": "پاورڈ بائی",
+  "footer.newTab": "(نئے ٹیب میں کھلتا ہے)",
+  "categories.title": "تمام کیٹیگریز"
 }
