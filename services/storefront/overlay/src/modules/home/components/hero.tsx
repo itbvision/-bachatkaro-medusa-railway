@@ -11,7 +11,7 @@ export default async function Hero() {
         {t("hero.tagline")}
       </p>
       <LocalizedClientLink
-        href="/collections/ration-pack"
+        href="/build-my-pack"
         className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-bk-amber px-5 font-semibold text-bk-navy"
       >
         {t("hero.cta")}

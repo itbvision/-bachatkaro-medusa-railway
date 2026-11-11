@@ -24,6 +24,7 @@ export function getPriceInfo(product: HttpTypes.StoreProduct, locale = "en") {
   const pct = orig > sale ? Math.round((1 - sale / orig) * 100) : 0
   return {
     variantId: variant.id,
+    saleAmount: sale,
     sale: formatPKR(sale, locale),
     original: pct ? formatPKR(orig, locale) : null,
     pct,
