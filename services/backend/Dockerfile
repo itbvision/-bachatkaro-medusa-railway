@@ -29,6 +29,8 @@ WORKDIR /src
 RUN curl -fsSL "https://codeload.github.com/medusajs/dtc-starter/tar.gz/${DTC_STARTER_REF}" \
   | tar -xz --strip-components=1
 COPY overlay/ apps/backend/
+# >>> ADDED: registers the product-media module in medusa-config.ts
+RUN cd apps/backend && node scripts/patch-medusa-config.mjs
 RUN pnpm install --frozen-lockfile --filter "@dtc/backend..." \
  && pnpm --filter @dtc/backend add --save-exact "@rokmohar/medusa-plugin-meilisearch@${MEILISEARCH_PLUGIN_VERSION}"
 ENV NODE_OPTIONS=--max-old-space-size=4096
