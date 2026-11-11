@@ -98,14 +98,20 @@ async function serveObject(req: Request, key: string): Promise<Response> {
   try {
     stat = await file.stat()
   } catch (error: unknown) {
-    if (isNotFound(error)) return plain(404, "Not Found")
+    if (isNotFound(error)) {
+        console.warn(`[media-proxy] not found: "${key}" in bucket ${BUCKET}`, error)
+        return plain(404, "Not Found")
+      }
     console.error(`[media-proxy] stat failed for "${key}":`, error)
     return plain(502, "Bad Gateway")
   }
 
   const contentType = stat.type || "application/octet-stream"
   // Same answer as a missing object: do not reveal what else is stored.
-  if (!isAllowedType(contentType)) return plain(404, "Not Found")
+  if (!isAllowedType(contentType)) {
+      console.warn(`[media-proxy] blocked type "${contentType}" for "${key}"`)
+      return plain(404, "Not Found")
+    }
 
   const headers: Record<string, string> = {
     ...BASE_HEADERS,
