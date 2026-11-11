@@ -211,5 +211,11 @@ module.exports = defineConfig({
     // the image does not depend on the public domain at build time.
     backendUrl: BACKEND_URL ?? "/",
   },
-  modules: [...redisModules, fileModule, ...searchModules, ...paymentModules],
+    modules: [
+    { resolve: "./src/modules/product-media" },
+    ...redisModules,
+    fileModule,
+    ...searchModules,
+    ...paymentModules,
+  ],
 })
