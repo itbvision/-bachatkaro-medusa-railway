@@ -8,6 +8,7 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CategoryBanner from "@modules/categories/components/category-banner"
+import AllCategoriesLink from "@modules/categories/components/all-categories-link"
 import { HttpTypes } from "@medusajs/types"
 
 export default function CategoryTemplate({
@@ -40,6 +41,7 @@ export default function CategoryTemplate({
   return (
     <>
       <CategoryBanner categoryId={category.id} categoryName={category.name} />
+      <AllCategoriesLink />
       <div className="flex flex-col small:flex-row small:items-start pb-6 content-container" data-testid="category-container">
         <RefinementList sortBy={sort} data-testid="sort-by-container" />
         <div className="w-full">
