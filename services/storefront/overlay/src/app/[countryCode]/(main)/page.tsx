@@ -24,7 +24,7 @@ export default async function Home(props: { params: Promise<{ countryCode: strin
   return (
     <>
       <Hero />
-      <CategoryRow categories={categories ?? []} />
+      <CategoryRow categories={categories ?? []} countryCode={countryCode} />
       <section className="mx-auto max-w-6xl px-4 py-4">
         <h2 className="mb-2 font-display text-base font-bold text-bk-navy">{t("home.deals")}</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">

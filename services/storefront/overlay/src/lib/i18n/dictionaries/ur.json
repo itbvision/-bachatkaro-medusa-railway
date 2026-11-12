@@ -87,5 +87,14 @@
   "checkout.guestHint": "اکاؤنٹ کی ضرورت نہیں۔ اگلے مرحلے میں آپ ڈیلیوری کی تفصیلات اور ای میل درج کریں گے۔",
   "checkout.signInHint": "اپنے آرڈرز ٹریک کریں اور تیزی سے چیک آؤٹ کریں۔",
   "checkout.registerHint": "اگلی بار کے لیے اپنی تفصیلات محفوظ کریں۔",
-  "checkout.backToCart": "کارٹ پر واپس جائیں"
+  "checkout.backToCart": "کارٹ پر واپس جائیں",
+  "nav.register": "رجسٹر",
+  "categories.count": "{count} پروڈکٹس",
+  "categories.count1": "1 پروڈکٹ",
+  "store.title": "تمام پروڈکٹس",
+  "store.showing": "{total} میں سے {from}-{to} دکھائے جا رہے ہیں",
+  "store.prev": "پچھلا",
+  "store.next": "اگلا",
+  "store.page": "صفحہ {n}",
+  "store.empty": "ابھی کوئی پروڈکٹ دستیاب نہیں۔"
 }
