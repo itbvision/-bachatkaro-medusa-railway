@@ -6,7 +6,7 @@ export default async function CheckoutLayout({ children }: { children: React.Rea
   const { t } = await getT()
   return (
     <div className="relative w-full bg-white small:min-h-screen">
-      <div className="h-16 border-b border-bk-line bg-white">
+      <div className="h-16 border-b border-bk-line bg-bk-cream">
         <nav className="content-container flex h-full items-center justify-between">
           <LocalizedClientLink
             href="/cart"
@@ -26,7 +26,7 @@ export default async function CheckoutLayout({ children }: { children: React.Rea
         </nav>
       </div>
       <div className="relative" data-testid="checkout-container">{children}</div>
-      <footer className="flex w-full flex-col items-center justify-center gap-1 border-t border-bk-line px-4 py-4 text-center text-xs text-stone-600 sm:flex-row sm:gap-2">
+      <footer className="flex w-full flex-col items-center justify-center gap-1 border-t border-bk-line bg-bk-cream px-4 py-4 text-center text-xs text-stone-600 sm:flex-row sm:gap-2">
         <p>&copy; {new Date().getFullYear()} BachatKaro. {t("footer.rights")}</p>
         <p>
           {t("footer.poweredBy")}{" "}

@@ -29,7 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       data-mode="light"
       className={`${inter.variable} ${montserrat.variable} ${naskh.variable}`}
     >
-      <body className={`bg-bk-cream text-stone-800 antialiased ${locale === "ur" ? "font-urdu" : "font-sans"}`}>
+      <body className={`bg-white text-stone-800 antialiased ${locale === "ur" ? "font-urdu" : "font-sans"}`}>
         <main className="relative">{children}</main>
       </body>
     </html>

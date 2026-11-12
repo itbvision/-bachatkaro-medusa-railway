@@ -13,7 +13,7 @@ export default async function CategoryRow({
   const [images, counts] = await Promise.all([getCategoryImagesMap(), getCategoryCounts(countryCode, shown)])
 
   return (
-    <section className="mx-auto max-w-6xl px-4 pt-4">
+    <section className="bk-wrap pt-4">
       <div className="mb-2 flex items-center justify-between">
         <h2 className="font-display text-base font-bold text-bk-navy">{t("home.categories")}</h2>
         <LocalizedClientLink href="/categories" className="inline-flex min-h-11 items-center text-sm font-semibold text-bk-navy underline">

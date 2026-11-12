@@ -25,9 +25,9 @@ export default async function Home(props: { params: Promise<{ countryCode: strin
     <>
       <Hero />
       <CategoryRow categories={categories ?? []} countryCode={countryCode} />
-      <section className="mx-auto max-w-6xl px-4 py-4">
+      <section className="bk-wrap py-4">
         <h2 className="mb-2 font-display text-base font-bold text-bk-navy">{t("home.deals")}</h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {products.map((p) => (<ProductCard key={p.id} product={p} countryCode={countryCode} />))}
         </div>
       </section>

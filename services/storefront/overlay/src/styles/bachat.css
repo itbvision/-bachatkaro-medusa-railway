@@ -2,7 +2,6 @@
 .bg-bk-navy{background-color:#17396B}
 .bg-bk-amber{background-color:#F5A623}
 .bg-bk-cream{background-color:#FFF8F1}
-.bg-bk-cream\/95{background-color:rgb(255 248 241 / .95)}
 .bg-bk-line{background-color:#F0E3D6}
 .border-bk-line{border-color:#F0E3D6}
 .text-bk-navy{color:#17396B}
@@ -10,3 +9,9 @@
 .text-bk-sale{color:#C2410C}
 .font-display{font-family:var(--font-montserrat),system-ui,sans-serif}
 .font-urdu{font-family:var(--font-naskh),serif}
+
+/* Wide, fluid page wrapper: fills the screen on phones to large monitors, centred on ultra-wide */
+.bk-wrap{width:100%;max-width:1920px;margin-inline:auto;padding-inline:clamp(1rem,3vw,3rem)}
+
+/* Make the stock pages (product, cart, checkout, account) use the same width */
+.content-container{max-width:1920px !important;padding-inline:clamp(1rem,3vw,3rem)}

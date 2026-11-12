@@ -86,7 +86,7 @@ export default function PackBuilder({
         ))}
       </div>
 
-      <ul className="mt-4 space-y-2">
+      <ul className="mt-4 grid gap-2 lg:grid-cols-2">
         {items.map((i) => {
           const included = !off.has(i.id)
           return (

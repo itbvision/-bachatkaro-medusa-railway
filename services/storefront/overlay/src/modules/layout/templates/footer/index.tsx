@@ -16,8 +16,8 @@ export default async function Footer() {
   const link = "inline-flex min-h-11 items-center hover:underline"
 
   return (
-    <footer className="mt-8 w-full border-t border-bk-line bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-10">
+    <footer className="mt-8 w-full border-t border-bk-line bg-bk-cream">
+      <div className="bk-wrap py-10">
         <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
           <LocalizedClientLink href="/" aria-label="Bachat Karo - home" className="self-start">
             <Image src="/brand/bachatkaro-logo.png" alt="Bachat Karo" width={831} height={163} className="h-10 w-auto" />

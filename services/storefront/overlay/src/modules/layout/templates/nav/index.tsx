@@ -30,7 +30,7 @@ export default async function Nav() {
   return (
     <header className="border-b border-bk-line bg-bk-cream lg:sticky lg:top-0 lg:z-40">
       <div className="border-b border-bk-line">
-        <div className="mx-auto flex max-w-6xl items-center justify-end px-4">
+        <div className="bk-wrap flex items-center justify-end">
           {customer ? (
             <LocalizedClientLink href="/account" className={util}>{t("nav.account")}</LocalizedClientLink>
           ) : (
@@ -42,28 +42,31 @@ export default async function Nav() {
           )}
         </div>
       </div>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-2">
-        <LocalizedClientLink href="/" aria-label="Bachat Karo - home">
+
+      {/* Phones/tablets: logo + tools, then area, then search. Large screens: one row. */}
+      <div className="bk-wrap flex flex-wrap items-center gap-x-3 gap-y-2 py-2">
+        <LocalizedClientLink href="/" aria-label="Bachat Karo - home" className="order-1 shrink-0">
           <Image src="/brand/bachatkaro-logo.png" alt="Bachat Karo" width={831} height={163}
-                 priority className="h-9 w-auto sm:h-10" />
+                 priority className="h-9 w-auto sm:h-10 lg:h-12" />
         </LocalizedClientLink>
-        <div className="flex items-center gap-2">
+        <div className="order-2 ml-auto flex items-center gap-2 lg:order-5 lg:ml-0">
           <LanguageSwitcher locale={locale} />
           <Suspense fallback={<span className="inline-block min-h-11 min-w-11" />}>
             <CartButton />
           </Suspense>
         </div>
+        <div className="order-3 w-full md:w-80 md:flex-none lg:w-96">
+          <AreaSelector label={t("nav.deliverTo")} areas={areas} current={area} />
+        </div>
+        <div className="order-4 w-full md:min-w-0 md:flex-1">
+          <SearchBox
+            placeholder={t("nav.search")}
+            labels={{ label: t("search.label"), none: t("search.none"), seeAll: t("search.seeAll") }}
+          />
+        </div>
       </div>
-      <div className="mx-auto max-w-6xl px-4 pb-2">
-        <AreaSelector label={t("nav.deliverTo")} areas={areas} current={area} />
-      </div>
-      <div className="mx-auto max-w-6xl px-4 pb-2">
-        <SearchBox
-          placeholder={t("nav.search")}
-          labels={{ label: t("search.label"), none: t("search.none"), seeAll: t("search.seeAll") }}
-        />
-      </div>
-      <nav aria-label="Main" className="mx-auto max-w-6xl overflow-x-auto px-4 pb-2">
+
+      <nav aria-label="Main" className="bk-wrap overflow-x-auto pb-2">
         <ul className="flex gap-2 whitespace-nowrap">
           {links.map((l) => (
             <li key={l.href}>

@@ -15,12 +15,12 @@ export default async function FindPage(props: {
   const { products } = await searchProducts(q, countryCode, 40)
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-6">
+    <section className="bk-wrap py-6">
       <h1 className="font-display text-2xl font-bold text-bk-navy">{t("search.resultsFor", { q })}</h1>
       {products.length === 0 ? (
         <p className="mt-4 text-stone-600">{t("search.none")}</p>
       ) : (
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {products.map((p) => (
             <ProductCard key={p.id} product={p} countryCode={countryCode} />
           ))}
