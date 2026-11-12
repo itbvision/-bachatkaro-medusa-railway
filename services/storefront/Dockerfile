@@ -39,6 +39,7 @@ RUN cd apps/storefront \
  && rm -rf .next/cache \
  && mv .next .next-template
 
+ENV NODE_OPTIONS=--max-old-space-size=4096
 FROM ${NODE_IMAGE} AS runtime
 # The placeholders above are not set here; start.mjs passes the real values
 # to `next start` (next.config.js checks NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY).
