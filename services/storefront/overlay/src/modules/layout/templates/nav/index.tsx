@@ -24,13 +24,24 @@ export default async function Nav() {
     { href: "/brands", label: t("nav.brands") },
     { href: "/build-my-pack", label: t("nav.buildPack") },
     { href: "/support", label: t("nav.support") },
-    customer
-      ? { href: "/account", label: t("nav.account") }
-      : { href: "/sign-in", label: t("nav.signIn") },
   ]
+  const util = "inline-flex min-h-11 items-center px-2 text-sm font-semibold text-bk-navy hover:underline"
 
   return (
     <header className="border-b border-bk-line bg-bk-cream lg:sticky lg:top-0 lg:z-40">
+      <div className="border-b border-bk-line">
+        <div className="mx-auto flex max-w-6xl items-center justify-end px-4">
+          {customer ? (
+            <LocalizedClientLink href="/account" className={util}>{t("nav.account")}</LocalizedClientLink>
+          ) : (
+            <>
+              <LocalizedClientLink href="/sign-in" className={util}>{t("nav.signIn")}</LocalizedClientLink>
+              <span aria-hidden="true" className="text-stone-400">|</span>
+              <LocalizedClientLink href="/register" className={util}>{t("nav.register")}</LocalizedClientLink>
+            </>
+          )}
+        </div>
+      </div>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-2">
         <LocalizedClientLink href="/" aria-label="Bachat Karo - home">
           <Image src="/brand/bachatkaro-logo.png" alt="Bachat Karo" width={831} height={163}

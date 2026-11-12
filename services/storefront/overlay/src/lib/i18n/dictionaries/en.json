@@ -87,5 +87,14 @@
   "checkout.guestHint": "No account needed. Next you will enter your delivery details and email.",
   "checkout.signInHint": "Track your orders and check out faster.",
   "checkout.registerHint": "Save your details for next time.",
-  "checkout.backToCart": "Back to cart"
+  "checkout.backToCart": "Back to cart",
+  "nav.register": "Register",
+  "categories.count": "{count} products",
+  "categories.count1": "1 product",
+  "store.title": "All products",
+  "store.showing": "Showing {from}-{to} of {total}",
+  "store.prev": "Previous",
+  "store.next": "Next",
+  "store.page": "Page {n}",
+  "store.empty": "No products are available yet."
 }
