@@ -12,12 +12,12 @@ export default async function BrandsPage(props: { params: Promise<{ countryCode:
   const brands = groupByBrand(await getAllProducts(countryCode))
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-6">
+    <section className="bk-wrap py-6">
       <h1 className="font-display text-2xl font-bold text-bk-navy">{t("brands.title")}</h1>
       {brands.length === 0 ? (
         <p className="mt-4 text-stone-600">{t("brands.empty")}</p>
       ) : (
-        <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {brands.map((b) => {
             const img = b.products.find((p) => p.thumbnail)?.thumbnail
             return (

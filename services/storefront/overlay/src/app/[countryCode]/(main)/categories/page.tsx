@@ -16,9 +16,9 @@ export default async function CategoriesPage(props: { params: Promise<{ countryC
   const [images, counts] = await Promise.all([getCategoryImagesMap(), getCategoryCounts(countryCode, parents)])
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-6">
+    <section className="bk-wrap py-6">
       <h1 className="font-display text-2xl font-bold text-bk-navy">{t("categories.title")}</h1>
-      <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {parents.map((c) => {
           const thumb = images[c.id]?.find((i) => i.type === "thumbnail")
           const n = counts[c.id]

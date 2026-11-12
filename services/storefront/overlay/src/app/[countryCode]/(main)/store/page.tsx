@@ -28,7 +28,7 @@ export default async function StorePage(props: {
   const to = Math.min(page * PAGE_SIZE, count)
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-6">
+    <section className="bk-wrap py-6">
       <h1 className="font-display text-2xl font-bold text-bk-navy">{t("store.title")}</h1>
       {count > 0 && (
         <p className="mt-1 text-sm text-stone-600">{t("store.showing", { from, to, total: count })}</p>
@@ -36,7 +36,7 @@ export default async function StorePage(props: {
       {products.length === 0 ? (
         <p className="mt-4 text-stone-700">{t("store.empty")}</p>
       ) : (
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {products.map((p) => (
             <ProductCard key={p.id} product={p} countryCode={countryCode} />
           ))}

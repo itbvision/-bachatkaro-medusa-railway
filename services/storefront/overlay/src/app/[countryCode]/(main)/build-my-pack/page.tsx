@@ -30,7 +30,7 @@ export default async function BuildMyPackPage(props: { params: Promise<{ country
   })
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-6">
+    <section className="bk-wrap py-6">
       <h1 className="font-display text-2xl font-bold text-bk-navy">{t("pack.title")}</h1>
       <p className="mt-1 text-stone-700">{t("pack.intro")}</p>
       <div className="mt-4">
