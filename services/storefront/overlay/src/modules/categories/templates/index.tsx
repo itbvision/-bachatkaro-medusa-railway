@@ -1,87 +1,114 @@
 import { notFound } from "next/navigation"
-import { Suspense } from "react"
-
-import InteractiveLink from "@modules/common/components/interactive-link"
-import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import PaginatedProducts from "@modules/store/templates/paginated-products"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import CategoryBanner from "@modules/categories/components/category-banner"
-import AllCategoriesLink from "@modules/categories/components/all-categories-link"
 import { HttpTypes } from "@medusajs/types"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ProductCard from "@modules/products/components/product-card"
+import PaginationLinks from "@modules/store/components/pagination-links"
+import CategoryBanner from "@modules/categories/components/category-banner"
+import { listProducts } from "@lib/data/products"
+import { getT } from "@lib/i18n/get-locale"
 
-export default function CategoryTemplate({
+const PAGE_SIZE = 24
+
+export default async function CategoryTemplate({
   category,
-  sortBy,
   page,
   countryCode,
 }: {
   category: HttpTypes.StoreProductCategory
-  sortBy?: SortOptions
+  sortBy?: string
   page?: string
   countryCode: string
 }) {
-  const pageNumber = page ? parseInt(page) : 1
-  const sort = sortBy || "created_at"
-
   if (!category || !countryCode) notFound()
+  const { t } = await getT()
+  const pageNumber = Math.max(1, parseInt(page ?? "1", 10) || 1)
 
-  const parents = [] as HttpTypes.StoreProductCategory[]
-
-  const getParents = (category: HttpTypes.StoreProductCategory) => {
-    if (category.parent_category) {
-      parents.push(category.parent_category)
-      getParents(category.parent_category)
-    }
+  const parents: HttpTypes.StoreProductCategory[] = []
+  let up: HttpTypes.StoreProductCategory | null | undefined = category.parent_category
+  while (up) {
+    parents.unshift(up)
+    up = up.parent_category
   }
+  const basePath = `/categories/${[...parents, category].map((c) => c.handle).join("/")}`
 
-  getParents(category)
+  // Products of this category and of its direct sub-categories
+  const ids = [category.id, ...(category.category_children ?? []).map((c) => c.id)]
+  const { response } = await listProducts({
+    pageParam: pageNumber,
+    countryCode,
+    queryParams: { category_id: ids, limit: PAGE_SIZE, order: "-created_at", fields: "*variants.calculated_price" },
+  })
+  const { products, count } = response
+  const totalPages = Math.max(1, Math.ceil(count / PAGE_SIZE))
+  const from = count === 0 ? 0 : (pageNumber - 1) * PAGE_SIZE + 1
+  const to = Math.min(pageNumber * PAGE_SIZE, count)
+  const countText = count === 1 ? t("categories.count1") : t("categories.count", { count })
+  const children = category.category_children ?? []
+  const crumb = "inline-flex min-h-11 items-center font-semibold text-bk-navy underline"
 
   return (
-    <>
-      <CategoryBanner categoryId={category.id} categoryName={category.name} />
-      <AllCategoriesLink />
-      <div className="flex flex-col small:flex-row small:items-start pb-6 content-container" data-testid="category-container">
-        <RefinementList sortBy={sort} data-testid="sort-by-container" />
-        <div className="w-full">
-          <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-            {parents &&
-              parents.map((parent) => (
-                <span key={parent.id} className="text-ui-fg-subtle">
-                  <LocalizedClientLink
-                    className="mr-4 hover:text-black"
-                    href={`/categories/${parent.handle}`}
-                    data-testid="sort-by-link"
-                  >
-                    {parent.name}
-                  </LocalizedClientLink>
-                  /
-                </span>
-              ))}
-            <h1 data-testid="category-page-title">{category.name}</h1>
-          </div>
-          {category.description && (
-            <div className="mb-8 text-base-regular">
-              <p>{category.description}</p>
-            </div>
-          )}
-          {category.category_children && (
-            <div className="mb-8 text-base-large">
-              <ul className="grid grid-cols-1 gap-2">
-                {category.category_children?.map((c) => (
-                  <li key={c.id}>
-                    <InteractiveLink href={`/categories/${c.handle}`}>{c.name}</InteractiveLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <Suspense fallback={<SkeletonProductGrid numberOfProducts={category.products?.length ?? 8} />}>
-            <PaginatedProducts sortBy={sort} page={pageNumber} categoryId={category.id} countryCode={countryCode} />
-          </Suspense>
-        </div>
+    <div className="bk-wrap py-4" data-testid="category-container">
+      <nav aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-x-2 text-sm">
+          <li>
+            <LocalizedClientLink href="/categories" className={crumb}>{t("categories.title")}</LocalizedClientLink>
+          </li>
+          {parents.map((p) => (
+            <li key={p.id} className="flex items-center gap-x-2">
+              <span aria-hidden="true">/</span>
+              <LocalizedClientLink href={`/categories/${p.handle}`} className={crumb}>{p.name}</LocalizedClientLink>
+            </li>
+          ))}
+          <li className="flex items-center gap-x-2">
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" className="font-semibold text-stone-700">{category.name}</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div className="mt-2">
+        <CategoryBanner categoryId={category.id} title={category.name} subtitle={countText} />
       </div>
-    </>
+
+      {category.description && <p className="mt-4 max-w-3xl text-stone-700">{category.description}</p>}
+
+      {children.length > 0 && (
+        <nav aria-label={t("categories.title")} className="mt-4 overflow-x-auto">
+          <ul className="flex gap-2 whitespace-nowrap">
+            {children.map((c) => (
+              <li key={c.id}>
+                <LocalizedClientLink
+                  href={`${basePath}/${c.handle}`}
+                  className="inline-flex min-h-11 items-center rounded-full border border-bk-line bg-white px-4 text-sm font-semibold text-bk-navy"
+                >
+                  {c.name}
+                </LocalizedClientLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {count > 0 && (
+        <p className="mt-4 text-sm text-stone-600">{t("store.showing", { from, to, total: count })}</p>
+      )}
+
+      {products.length === 0 ? (
+        <p className="mt-4 text-stone-700">{t("store.empty")}</p>
+      ) : (
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          {products.map((p) => (
+            <ProductCard key={p.id} product={p} countryCode={countryCode} />
+          ))}
+        </div>
+      )}
+
+      <PaginationLinks
+        page={pageNumber}
+        totalPages={totalPages}
+        basePath={basePath}
+        labels={{ prev: t("store.prev"), next: t("store.next"), page: t("store.page") }}
+      />
+    </div>
   )
 }
