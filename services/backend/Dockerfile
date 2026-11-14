@@ -33,6 +33,8 @@ COPY overlay/ apps/backend/
 RUN cd apps/backend && node scripts/patch-medusa-config.mjs
 RUN pnpm install --frozen-lockfile --filter "@dtc/backend..." \
  && pnpm --filter @dtc/backend add --save-exact "@rokmohar/medusa-plugin-meilisearch@${MEILISEARCH_PLUGIN_VERSION}"
+# >>> ADDED: resend email module
+RUN pnpm --filter @dtc/backend add --save-exact resend@6.38.1 
 # >>> ADDED: make sure the admin widget's dependencies exist, and log what is installed
 # >>> ADDED: admin widget dependencies (versions match Medusa 2.21.2)
 RUN pnpm --filter @dtc/backend add --save-exact @medusajs/icons@2.21.2 @medusajs/js-sdk@2.21.2

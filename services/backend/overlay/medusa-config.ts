@@ -211,11 +211,29 @@ module.exports = defineConfig({
     // the image does not depend on the public domain at build time.
     backendUrl: BACKEND_URL ?? "/",
   },
-    modules: [
+      modules: [
     { resolve: "./src/modules/product-media" },
     ...redisModules,
     fileModule,
     ...searchModules,
     ...paymentModules,
+    {
+      resolve: "@medusajs/medusa/notification",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/resend",
+            id: "resend",
+            options: {
+              channels: ["email"],
+              api_key: env("RESEND_API_KEY"),
+              from: env("RESEND_FROM_EMAIL"),
+              store_name: "BachatKaro",
+              reply_to: "contact@bachatkaro.pk",
+            },
+          },
+        ],
+      },
+    },
   ],
 })
